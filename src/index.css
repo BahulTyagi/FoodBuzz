@@ -35,6 +35,21 @@
   /* border: 1px solid black;   */
 }
 
+.shimmer-container
+{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shimmer-card
+{
+  width: 200px;
+  height: 300px;
+  margin: 10px;
+  background-color: rgb(164, 159, 159);
+}
+
+
 .res-card :hover
 {
   cursor: pointer;
@@ -51,3 +66,13 @@
   width: 100%;;
 }
 
+.filter-btn{
+  cursor: pointer;
+}
+
+.search{
+  margin-left: 10px;
+}
+.filter{
+  margin-top: 10px;
+}
