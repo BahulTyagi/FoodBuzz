@@ -76,3 +76,15 @@
 .filter{
   margin-top: 10px;
 }
+
+.header-items{
+  text-decoration: none;
+  padding: 10px;
+}
+
+.header-items:hover
+{
+  background-color: grey;
+  color: white;
+  border-radius: 15px;
+}
