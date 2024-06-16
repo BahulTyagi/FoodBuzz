@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -9,6 +9,8 @@ import Contact from './components/Contact';
 import Error from './components/Error';
 import Body from './components/Body';
 import RestaurantMenu from './components/RestaurantMenu';
+
+const Grocery=lazy(()=>import("./components/Grocery")); // i am unable to use curly braces in the arrow function return statement, it gives an error
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -32,6 +34,10 @@ export const router=createBrowserRouter([
       {
         path:"/restaurants/:resId",
         element:<RestaurantMenu/>
+      },
+      {
+        path:"/grocery",
+        element:(<Suspense fallback={<h1>Loading</h1>}><Grocery/></Suspense>)
       }
     ],
     errorElement: <Error/>
