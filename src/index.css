@@ -32,7 +32,7 @@
   width: 200px;
   height: 300px;
   margin: 10px;
-  /* border: 1px solid black;   */
+ border: 1px solid black;   
 }
 
 .shimmer-container
@@ -87,4 +87,36 @@
   background-color: grey;
   color: white;
   border-radius: 15px;
+}
+
+.newBanner{
+  background-color: black;
+  color: white;
+  position: absolute  ;
+  margin: 10px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.resInfo{
+  display: flex;
+  justify-content: center;
+}
+
+.Accordian{
+  width: 70%;
+  margin: auto;
+  font:900;
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid aqua;
+  background-color: aquamarine;
+  padding: 10px;
+}
+
+.resMenu
+{
+  display: flex;
+  justify-content: center;
+  padding: 10px;
 }

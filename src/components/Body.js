@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard , {OpenedRestaurant} from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 
 const Body=()=>{
 
-
-
 const[listOfRestaurant, setListOfRestaurants]=useState([]);
 const[filteredRestaurants, setFilteredRestaurants]=useState([]);
-
 const[searchText, setSearchText]=useState("");
+
+const OpenRestaurant=OpenedRestaurant(RestaurantCard);
 
 useEffect(()=>{
   fetchData();
@@ -25,14 +24,11 @@ useEffect(()=>{
     setFilteredRestaurants(res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   }
 
-  return listOfRestaurant.length===0?<Shimmer/>:
+  return listOfRestaurant?.length===0?<Shimmer/>:
     (
       <div className="body">
-        
         <div className="filter">
-
-          <input type="text" className="searchbar" value={searchText} onChange={e=>{
-                                                                                    let val=e.target.value;
+          <input type="text" className="searchbar" value={searchText} onChange={e=>{let val=e.target.value;
                                                                                     setSearchText(val);
                                                                                     val?setFilteredRestaurants(listOfRestaurant.filter(res=>res.info.name.toLowerCase().includes(val.toLowerCase()))):setFilteredRestaurants(listOfRestaurant);
                                                                                     }}/>
@@ -41,7 +37,6 @@ useEffect(()=>{
             setFilteredRestaurants(listOfRestaurant.filter(res=>res.info.name.toLowerCase().includes(searchText.toLowerCase())));
           }}>Search</button>
         
-
           <button 
           onClick={()=>{
             setFilteredRestaurants(listOfRestaurant.filter((res)=>res.info["avgRating"]>=4));
@@ -51,10 +46,11 @@ useEffect(()=>{
         
         <div className="res-container">
           {
-            filteredRestaurants.map(restaurant=><Link to={"/restaurants/"+restaurant.info.id} key={restaurant.info.id} ><RestaurantCard resName={restaurant.info.name} image_id={restaurant.info.cloudinaryImageId}/></Link>)
+            filteredRestaurants.map(restaurant=><Link to={"/restaurants/"+restaurant.info.id} key={restaurant.info.id}>{
+              restaurant?.info?.isNewlyOnboarded?<OpenRestaurant resName={restaurant.info.name} image_id={restaurant.info.cloudinaryImageId}/> : <RestaurantCard resName={restaurant.info.name} image_id={restaurant.info.cloudinaryImageId}/> 
+            }</Link>)
           }
        </div>
-  
       </div>
     )
   }

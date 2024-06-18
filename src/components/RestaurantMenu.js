@@ -1,22 +1,27 @@
 import { useParams} from "react-router-dom"
 import { useEffect, useState } from "react"
 import Shimmer from "./Shimmer";
+import RestaurantCategory from "./RestaurantCategory";
+import useRestaurantMenu from "./useRestaurantMenu";
+
 const RestaurantMenu=()=>{
 
-    const[resName, setResName]=useState("");
     const {resId}=useParams();
-    useEffect(()=>{
-        fetchMenu();
-    },[])
+    const resInfo=useRestaurantMenu(resId);
+    if(resInfo==null) return <Shimmer/>;
+        
+    const {name, costForTwoMessage}=resInfo?.cards[2]?.card?.card?.info;
+    const categories=(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((x)=> x?.card?.card?.["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"));
 
-    const fetchMenu=async()=>{
-        let data=await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.65420&lng=77.23730&restaurantId=${resId}&catalog_qa=undefined&submitAction=ENTER`);
-        data=await data.json();
-      setResName(data?.data?.cards[2]?.card?.card?.info?.name);
-    }
-return resName?(<><h1>{resName}</h1></>):(
-    <Shimmer/>
-)
+return (
+            <>
+            <h1 className="resInfo">{name}</h1>
+            <p className="resInfo">{costForTwoMessage}</p>
+
+            {categories?categories.map(category=><RestaurantCategory itemCategory={category}/>):null}
+            
+            </>
+        )
 }
 
 export default RestaurantMenu

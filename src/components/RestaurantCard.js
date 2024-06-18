@@ -9,4 +9,16 @@ const RestaurantCard=(props)=>{
     )
   }
 
+
+ export const OpenedRestaurant=(RestaurantCard)=>{
+    return (props)=>{
+      return(
+        <>
+        <label className="newBanner">Newly Added</label>
+        <RestaurantCard {...props}/>
+        </>
+      )
+    }
+  } 
+
 export default RestaurantCard;
