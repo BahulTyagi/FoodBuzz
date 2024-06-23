@@ -104,6 +104,7 @@
 }
 
 .Accordian{
+  cursor: pointer;
   width: 70%;
   margin: auto;
   font:900;
@@ -116,7 +117,21 @@
 
 .resMenu
 {
-  display: flex;
-  justify-content: center;
+  width: 70%;
+  margin: auto;
   padding: 10px;
+}
+
+.itemList
+{
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.itemImage
+{
+  width: 30%;
+  padding: 20px;
+  height: 10%;
 }

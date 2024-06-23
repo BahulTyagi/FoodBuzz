@@ -9,6 +9,7 @@ import Contact from './components/Contact';
 import Error from './components/Error';
 import Body from './components/Body';
 import RestaurantMenu from './components/RestaurantMenu';
+import Cart from './components/Cart';
 
 const Grocery=lazy(()=>import("./components/Grocery")); // i am unable to use curly braces in the arrow function return statement, it gives an error
 
@@ -38,6 +39,10 @@ export const router=createBrowserRouter([
       {
         path:"/grocery",
         element:(<Suspense fallback={<h1>Loading</h1>}><Grocery/></Suspense>)
+      },
+      {
+        path:"/cart",
+        element:<Cart/>     
       }
     ],
     errorElement: <Error/>

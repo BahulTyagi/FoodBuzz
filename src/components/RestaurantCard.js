@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { CDN_URL } from "../utils/constants";
+import UserContext from "../utils/UserContext";
 
 const RestaurantCard=(props)=>{
     return(
@@ -11,10 +13,12 @@ const RestaurantCard=(props)=>{
 
 
  export const OpenedRestaurant=(RestaurantCard)=>{
+  const{loggedInUser}=useContext(UserContext);
     return (props)=>{
+      
       return(
         <>
-        <label className="newBanner">Newly Added</label>
+        <label className="newBanner">Newly Added by {loggedInUser}</label>
         <RestaurantCard {...props}/>
         </>
       )
